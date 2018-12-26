@@ -6,7 +6,12 @@ import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 // system
 import { requestFetchSingleUser } from 'pages/Users/actions';
-import { selectSingleUser, selectLoading } from 'pages/Users/selectors';
+import {
+  selectSingleUser,
+  selectLoading,
+  selectError
+} from 'pages/Users/selectors';
+import { withError } from 'hoc/withError';
 // view
 import * as View from 'view';
 
@@ -55,7 +60,8 @@ class User extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   user: selectSingleUser(),
-  loading: selectLoading()
+  loading: selectLoading(),
+  error: selectError()
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -65,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(User));
+)(withRouter(withError(User)));

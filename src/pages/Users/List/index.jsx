@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 // system
 import { requestFetchUsers } from 'pages/Users/actions';
-import { selectListUsers, selectLoading } from 'pages/Users/selectors';
+import { selectListUsers, selectLoading, selectError } from 'pages/Users/selectors';
 import { Book } from 'routes/book';
+import { withError } from 'hoc/withError';
 // view
 import * as View from 'view';
 
@@ -40,7 +41,8 @@ class List extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   users: selectListUsers(),
-  loading: selectLoading()
+  loading: selectLoading(),
+  error: selectError()
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -50,4 +52,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)((List));
+)(withError(List));

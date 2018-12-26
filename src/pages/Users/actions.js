@@ -30,6 +30,6 @@ export const successFetchSingleUser = data => ({
 });
 
 export const failedFetchSingleUser = error => ({
-    type: actionTypes.FETCH_USERS_SINGLE_FAILED,
+    type: actionTypes.FETCH_USER_SINGLE_FAILED,
     payload: { error }
-})
+});
